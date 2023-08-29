@@ -4,5 +4,8 @@
 # ignore testing files
 *.test
 
+# ignore combined JS files
+combined.js
+
 # ignore go build files
 gh-issue-viewer
