@@ -1,0 +1,27 @@
+{{ define "home/api-token-modal.html" }}
+
+<!-- Vertically centered modal -->
+<div class="modal fade" id="api-token-modal" tabindex="-1" aria-labelledby="api-token-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="api-token-modal-label">Add GitHub Token</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    <!-- create a box that shows the users name -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="GitHub-token" placeholder="GitHub-token" aria-label="GitHub-token" aria-describedby="GitHub-token">
+                        <label class="floating-input" id="api-token-modal-update-status">GitHub Token</label>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="api-token-modal-update-token">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{ end }}

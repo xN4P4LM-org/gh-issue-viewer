@@ -1,0 +1,50 @@
+/* set the background color of the page */
+body {
+    /* set the background color to black */
+    background-color: #404040e7;
+
+    /* set the font family to sans-serif */
+    font-family: sans-serif;
+
+    /* set the font color to white */
+    color: white;
+}
+
+/* add padding to the row */
+.row {
+    /* set the padding to 12.5px on top and bottom */
+    padding: 12.5px 0px 12.5px 0px;
+
+    /* set the background color to 10% darker than the page */
+    background-color: #303030e7;
+}
+
+/* add padding to the columns */
+.row > .col {
+    /* set the padding to 12.5px on all sides */
+    padding: 12.5px 12.5px 12.5px 12.5px; 
+} 
+
+.row > .box-1 {
+    /* set the background color to 10% darker than the page */
+    background-color: #3f4b5fe7;
+
+    /* set the left and right spacing to 25px */
+    margin-left: 25px;
+    margin-right: 25px;
+
+    /* set the border radius to 5px */
+    border-radius: 5px;
+}
+
+.row > .box-2 {
+    /* set the background color to 10% darker than the page */
+    background-color: #3f5f5be7;
+
+    /* set the left and right spacing to 25px */
+    margin-left: 25px;
+    margin-right: 25px;
+
+    /* set the border radius to 5px */
+    border-radius: 5px;
+}

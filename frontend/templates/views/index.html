@@ -1,0 +1,19 @@
+{{ define "views/index.html"}}
+<!--index.html-->
+
+<!--Embed the header.html template at this location-->
+{{ template "layouts/header.html" .}}
+
+<!--Embed the navigation.html template at this location-->
+{{ template "layouts/navigation.html" .}}
+
+<!-- Embed the first column of the grid layout -->
+{{ template "home/first-column.html" . }}
+
+<!-- Embed the issues template -->
+{{ template "home/issues.html" . }}
+
+<!--Embed the footer.html template at this location-->
+{{ template "layouts/footer.html" .}}
+
+{{ end }}
