@@ -1,0 +1,8 @@
+# ignore vscode settings
+.vscode
+
+# ignore testing files
+*.test
+
+# ignore go build files
+gh-issue-viewer
