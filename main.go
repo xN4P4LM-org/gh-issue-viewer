@@ -49,8 +49,8 @@ func main() {
 	frontend.SetupFrontend(web, ctx)
 	log.Print("Frontend initialized")
 
-	// if environment variable ENVIRONMENT is production, then run the server using the FQDN and PORT
-	if os.Getenv("ENVIRONMENT") == "production" {
+	// check if gin is running in production
+	if gin.Mode() == "release" {
 
 		// get the FQDN from environment variable
 		domain := os.Getenv("FQDN")
@@ -63,10 +63,12 @@ func main() {
 
 		// run the server
 		web.Run(domain_port)
+		// log that the server has been started on the domain and port
+		log.Print("Starting Server @ " + domain_port)
 
 	}
 
-	if os.Getenv("ENVIRONMENT") != "production" {
+	if gin.Mode() == "debug" {
 
 		// Listen and Server in 0.0.0.0:8080
 		web.Run(":8080")
