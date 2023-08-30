@@ -52,19 +52,13 @@ func main() {
 	// check if gin is running in production
 	if gin.Mode() == "release" {
 
-		// get the FQDN from environment variable
-		domain := os.Getenv("FQDN")
-
 		// get the port from environment variable
-		port := os.Getenv("PORT")
-
-		// create the domain and port string
-		domain_port := domain + ":" + port
+		port := ":" + os.Getenv("PORT")
 
 		// run the server
-		web.Run(domain_port)
+		web.Run(port)
 		// log that the server has been started on the domain and port
-		log.Print("Starting Server @ " + domain_port)
+		log.Print("Starting Server @ localhost:" + port)
 
 	}
 
