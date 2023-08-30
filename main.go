@@ -4,6 +4,7 @@ import (
 	"context"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/xn4p4lm/gh-issue-viewer/api"
 	"github.com/xn4p4lm/gh-issue-viewer/frontend"
@@ -48,6 +49,27 @@ func main() {
 	frontend.SetupFrontend(web, ctx)
 	log.Print("Frontend initialized")
 
-	// Listen and Server in 0.0.0.0:8080
-	web.Run(":8080")
+	// if environment variable ENVIRONMENT is production, then run the server using the FQDN and PORT
+	if os.Getenv("ENVIRONMENT") == "production" {
+
+		// get the FQDN from environment variable
+		domain := os.Getenv("FQDN")
+
+		// get the port from environment variable
+		port := os.Getenv("PORT")
+
+		// create the domain and port string
+		domain_port := domain + ":" + port
+
+		// run the server
+		web.Run(domain_port)
+
+	}
+
+	if os.Getenv("ENVIRONMENT") != "production" {
+
+		// Listen and Server in 0.0.0.0:8080
+		web.Run(":8080")
+
+	}
 }

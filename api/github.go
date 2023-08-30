@@ -125,14 +125,23 @@ func getUsername(token string) (*github.User, int, error) {
 // function to get all issues for a given repository
 func getIssues(request_context *gin.Context) {
 
+	// define the assignee structure
+	type Assignee struct {
+		Login      string `json:"login"`
+		Html_Url   string `json:"html_url"`
+		Avatar_Url string `json:"avatar_url"`
+	}
+
+	// define the issue structure
 	type Issue struct {
-		Title         string   `json:"title"`
-		Body          string   `json:"body"`
-		Number        int      `json:"number"`
-		State         string   `json:"state"`
-		Labels        []string `json:"labels"`
-		Assignees     []string `json:"assignees"`
-		CommentsCount *int     `json:"comments_count"`
+		Title          string     `json:"title"`
+		Body           string     `json:"body"`
+		Number         int        `json:"number"`
+		State          string     `json:"state"`
+		Labels         []string   `json:"labels"`
+		Assignees      []Assignee `json:"assignees"`
+		Comments_Count *int       `json:"comments_count"`
+		IssueUrl       string     `json:"issue_url"`
 	}
 
 	// get the token from the authentication header
@@ -174,6 +183,11 @@ func getIssues(request_context *gin.Context) {
 	// loop through the issues
 	for _, issue := range issues {
 
+		// check the node ID is not PR_ prefix, if it is, skip the item
+		if strings.HasPrefix(issue.GetNodeID(), "PR_") {
+			continue
+		}
+
 		// get the array of labels
 		labels := issue.Labels
 
@@ -191,13 +205,30 @@ func getIssues(request_context *gin.Context) {
 		assignees := issue.Assignees
 
 		// create a slice to hold the assignees
-		var assignees_array []string
+		var assignees_array []Assignee
 
 		// loop through the assignees
 		for _, assignee := range assignees {
 
-			// append the assignee name to the slice
-			assignees_array = append(assignees_array, assignee.GetLogin())
+			// get the assignee name
+			assignee_name := assignee.GetLogin()
+
+			// get the assignee url
+			assignee_url := assignee.GetHTMLURL()
+
+			// get the assignee avatar url
+			assignee_avatar_url := assignee.GetAvatarURL()
+
+			// create an assignee structure
+			assignee_structure := Assignee{
+				Login:      assignee_name,
+				Html_Url:   assignee_url,
+				Avatar_Url: assignee_avatar_url,
+			}
+
+			// append the assignee to the slice
+			assignees_array = append(assignees_array, assignee_structure)
+
 		}
 
 		formatted_issue := Issue{
@@ -214,7 +245,9 @@ func getIssues(request_context *gin.Context) {
 			// get the issue assignees
 			Assignees: assignees_array,
 			// get the issue comments count
-			CommentsCount: issue.Comments,
+			Comments_Count: issue.Comments,
+			// get the issue url
+			IssueUrl: issue.GetHTMLURL(),
 		}
 
 		// append the issue to the slice
@@ -222,7 +255,9 @@ func getIssues(request_context *gin.Context) {
 	}
 
 	// return the issues in a json response
-	request_context.JSON(http.StatusOK, gin.H{"data": []any{issues_json}})
+	request_context.JSON(http.StatusOK, gin.H{
+		"total_count": len(issues_json),
+		"data":        []any{issues_json}})
 
 }
 
