@@ -3,57 +3,38 @@
 <!-- two row div -->
 <div class="container-fluid">
 
-    <!-- first row -->
-    <div class="row">
+    <div class="container box-1">
 
-        <!-- Spacer column -->
-        <div class="col"></div>
+        <p class="fs-5">Repository Selection</p>
 
-        <!-- first column -->
-        <div class="col box-1">
+        <hr/>
 
-            <h4>GitHub Credentials</h4>
-            
-            <!-- create a box that shows the users name -->
-            <div class="input-group mb-3">
-                <span class="input-group-text" >@</span>
-                <span class="form-control" id="GitHub-username" aria-label="GitHub Username" aria-describedby="GitHub-username">GitHub Username</span>
-            </div>
+        <p>
+            Click the button to select a GitHub repository
+        </p>
 
-            <!-- create a box that shows if the user has entered a token -->
-            <div class="input-group mb-3">                
-                <!-- button that triggers the api-token-modal -->
-                <button type="button" id="api-token-modal-pop-up-button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#api-token-modal">
-                    Enter Token
-                </button>
-            </div>
-
-            <!-- Embed the api-token-modal -->
-            {{ template "home/api-token-modal.html" . }}
-
-
+        <!-- text box for the owner/repository -->
+        <div class="input-group mb-3" id="repository-display">
+            <div class="form-floating">
+                <input type="email" class="form-control" id="owner-display" placeholder="Owner" disabled>
+                <label for="floatingInput">Owner</label>
+                </div>
+            <span class="input-group-text">/</span>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="repository-display" placeholder="Repository" disabled>
+                <label for="floatingInput">Repository</label>
+                </div>
         </div>
 
-        <!-- second row -->
-
-        <div class="col box-2">
-
-            <h4>Repository Selection</h4>
-
-            <!-- text box for the owner / user -->
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Username or Organization" aria-label="Username or Organization" aria-describedby="GitHub-Username-or-Organization">
-            </div>
-
-            <!-- text box for the repository -->
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="GitHub Repository" aria-label="GitHub Repository" aria-describedby="GitHub-repository">
-            </div>
-
+        <div class="input-group mb-3">     
+            <!-- button that triggers the repository-modal -->
+            <button type="button" id="repository-modal-pop-up-button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#repository-modal" aria-label="Select Repository button">
+                Set Repository
+            </button>
         </div>
 
-        <!-- Spacer column -->
-        <div class="col"></div>
+        <!-- Embed the repository-modal -->
+        {{ template "home/repository-modal.html" . }}
 
     </div>
 

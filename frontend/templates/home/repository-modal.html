@@ -1,5 +1,40 @@
 {{ define "home/repository-modal.html" }}
 
+<!-- Vertically centered modal -->
+<div class="modal fade" id="repository-modal" tabindex="-1" aria-labelledby="repository-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
 
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="repository-modal-label">Select Repository</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                    
+                <div class="input-group mb-3">
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="owner-input" placeholder="Owner" required>
+                        <label for="floatingInput">Owner</label>
+                      </div>
+                    <span class="input-group-text">/</span>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" id="repository-input" placeholder="Repository" required>
+                        <label for="floatingInput">Repository</label>
+                      </div>
+                </div>
+
+                <p>
+                    Add a repository in the format of owner/repository above. <br/>
+                    Once added, click the <span id="repository-modal-button-lable">Set Repository</span> (<inline class="font-monospace text-muted bg-dark">GitHub/Docs</inline>) button to save your changes.
+                </p>
+                    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button disabled type="button" class="btn btn-primary" id="repository-modal-update-button">Set Repository</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 {{ end }}

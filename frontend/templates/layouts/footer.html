@@ -1,13 +1,29 @@
 {{ define "layouts/footer.html"}}
 
+</main>
+<footer class="footer mt-auto py-3">
+    <div class="container">
+        <span class="text-muted"> 
+            <a href="https://github.com/xN4P4LM-org/gh-issue-viewer">
+                <i class="bi bi-github"></i> Check out the project on GitHub
+            </a>
+        </span>
+    </div>
+</footer>
+
 <!-- import the javascript file for bootstrap 5 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 
 <!-- import the javascript file for jquery -->
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
-<!-- import the javascript file for the application -->
+{{ if not .debug }}
 <script src="/scripts/combined.js"></script>
+{{ else }}
+    {{ range .scripts }}
+<script src="{{ . }}"></script>
+    {{ end }}
+{{ end }}
 
 
 </body>

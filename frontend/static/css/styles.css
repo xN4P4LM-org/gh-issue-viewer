@@ -15,8 +15,6 @@ body {
     /* set the padding to 12.5px on top and bottom */
     padding: 12.5px 0px 12.5px 0px;
 
-    /* set the background color to 10% darker than the page */
-    background-color: #303030e7;
 }
 
 /* add padding to the columns */
@@ -25,13 +23,14 @@ body {
     padding: 12.5px 12.5px 12.5px 12.5px; 
 } 
 
-.row > .box-1 {
+.box-1 {
     /* set the background color to 10% darker than the page */
-    background-color: #3f4b5fe7;
+    background-color: #363a40e7;
 
-    /* set the left and right spacing to 25px */
-    margin-left: 25px;
-    margin-right: 25px;
+    /* set the margin to 25px */
+    margin: 25px;
+
+    padding: 10px;
 
     /* set the border radius to 5px */
     border-radius: 5px;
@@ -47,4 +46,22 @@ body {
 
     /* set the border radius to 5px */
     border-radius: 5px;
+}
+
+.row > .box-3 {
+    /* set the background color to 10% darker than the page */
+    background-color: #1e1e1ee7;
+
+    /* set the left and right spacing to 25px */
+    margin-left: 25px;
+    margin-right: 25px;
+
+    /* set the border radius to 5px */
+    border-radius: 25px;
+}
+
+/* set the margins for modal-input-css */
+.modal-input-css {
+    /* set the bottom margin to 25px */
+    margin-bottom: 25px;
 }

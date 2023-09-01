@@ -4,6 +4,9 @@
 # ignore testing files
 *.test
 
+# secure files 
+secure/
+
 # ignore combined JS files
 combined.js
 

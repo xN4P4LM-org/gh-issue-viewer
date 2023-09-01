@@ -1,10 +1,32 @@
 {{ define "home/issues.html" }}
 
 <!-- Row 2 -->
-<div class="row">
+<div hidden class="row" id="issues-container">
+    <div class="col box-3">
+        <div class="input-group input-group-lg">
+            <span class="input-group-text"># of Issues</span>
+            <span class="input-group-text" id="issue-count">0</span>
+            <button type="button" class="btn btn-secondary">Sort by:</button>
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-describedby="issue-sort-lable" id="issue-sort">None</button>
+            <ul class="dropdown-menu" aria-labelledby="issue-sort-button">
+                <li><button class="dropdown-item" type="button">Assigned User</button></li>
+                <li><button class="dropdown-item" type="button">Status</button></li>
+            </ul>
+            <button type="button" class="btn btn-secondary">Filter by:</button>
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-describedby="issue-filter-lable" id="issue-filter">None</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">User</a></li>
+                <li><a class="dropdown-item" href="#">Status</a></li>
+            </ul>
+            <div class="form-floating">
+                <input type="email" class="form-control" id="issue-filter-value" placeholder="xn4p4lm">
+                <label for="issue-filter-value">None</label>
+            </div>
+        </div>
+        <hr/>
+    </div>
+    <div id="issue-results"></div>
+</div> 
 
-    
-
-</div>
 
 {{ end }}
