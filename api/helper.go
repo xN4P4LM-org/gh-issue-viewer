@@ -22,6 +22,12 @@ type Headers struct {
 	Date               string `json:"Date"`
 }
 
+type Status struct {
+	Valid   bool   `json:"valid"`
+	Message string `json:"message"`
+	Error   string `json:"error,omitempty"`
+}
+
 // function to setup the github api
 func setupGithubApi() (*github.Client, error) {
 

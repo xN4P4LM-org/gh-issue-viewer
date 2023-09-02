@@ -1,6 +1,8 @@
 package api
 
 import (
+	"encoding/json"
+	"io"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,10 +15,9 @@ import (
 // function to check if the repository is valid and/or accessible
 func checkRepository(request_context *gin.Context) {
 
-	type Status struct {
-		Valid   bool   `json:"valid"`
-		Message string `json:"message"`
-		Error   string `json:"error"`
+	type RequestData struct {
+		Owner      string `json:"owner"`
+		Repository string `json:"repository"`
 	}
 
 	github_api, err := setupGithubApi()
@@ -38,35 +39,26 @@ func checkRepository(request_context *gin.Context) {
 		return
 	}
 
-	owner_name := request_context.Query("owner")
-
-	if owner_name == "" {
-
-		response := Status{
-			Valid:   false,
-			Message: "owner is required",
-			Error:   err.Error(),
-		}
-
-		request_context.JSON(
-			http.StatusBadRequest,
-			gin.H{"error": response})
+	// Read the raw request body
+	body, err := io.ReadAll(request_context.Request.Body)
+	if err != nil {
+		// Handle the error
+		return
 	}
 
-	repository_name := request_context.Query("repository")
+	// Create an instance of the struct to hold the decoded JSON data
+	requestData := RequestData{}
 
-	if repository_name == "" {
-
-		response := Status{
-			Valid:   false,
-			Message: "repository is required",
-			Error:   err.Error(),
-		}
-
-		request_context.JSON(
-			http.StatusBadRequest,
-			gin.H{"error": response})
+	// Unmarshal the JSON data into the struct
+	err = json.Unmarshal(body, &requestData)
+	if err != nil {
+		// Handle the error
+		return
 	}
+
+	// Access the owner field from the decoded JSON data
+	owner_name := requestData.Owner
+	repository_name := requestData.Repository
 
 	_, response, request_err := github_api.Repositories.Get(CTX, owner_name, repository_name)
 
@@ -96,7 +88,7 @@ func checkRepository(request_context *gin.Context) {
 			Error:   "",
 		}
 
-		request_context.JSON(http.StatusOK, gin.H{"Repository": response, "Request Headers": headers})
+		request_context.JSON(http.StatusOK, gin.H{"repository": response, "Request Headers": headers})
 	}
 
 }

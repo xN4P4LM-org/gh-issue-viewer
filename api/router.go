@@ -19,9 +19,12 @@ func SetupApi(web *gin.Engine, ctx context.Context) {
 	api_prefix := web.Group("/api")
 
 	// route to check if the repository is valid and/or accessible
-	api_prefix.GET("repository/valid", checkRepository)
+	api_prefix.GET("repository/validate", checkRepository)
 
 	// route to get all issues for a given repository
 	api_prefix.GET("repository/issues", getIssues)
+
+	// route to check if a user or repository is valid and/or accessible
+	api_prefix.GET("user/validate", checkUser)
 
 }
